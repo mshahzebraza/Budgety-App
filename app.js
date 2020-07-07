@@ -1,14 +1,13 @@
 // BUDGET CONTROLLER
 var budgetController = ( function () {
 
-    // Some Code
+    // PUBLIC METHODS    
         
 })()
 
 
 // UI CONTROLLER
 var UIController = ( function () {
-    function acceptCall() {
 
     var DOMstrings = {
         inputType : ".add__type",
@@ -19,7 +18,7 @@ var UIController = ( function () {
 
 
 
-    // PUBLIC METHODS    
+    // PUBLIC METHODS - from Global
      
     return { 
         getInput : function () {
@@ -44,7 +43,24 @@ var UIController = ( function () {
 // GLOBAL APP CONTROLLER
 var AppController = ( function (budgetCtrl , UICtrl) {
     
-    var DOM = UICtrl.getDOMstrings(); // recieves DOM strings from UICtrl
+
+    // FOR EVENT LISTENERS
+
+    var setUpEventListeners = function () {
+
+        var DOM = UICtrl.getDOMstrings(); // recieves DOM strings from UICtrl
+        
+        document.querySelector(DOM.inputBtn).addEventListener("click" , ctrlAddItem)
+
+        document.addEventListener("keypress", function (event) {
+            if (event.keyCode === 13 || event.which === 13) {            
+                ctrlAddItem();
+            }
+        })
+
+
+    }
+    
     
     var ctrlAddItem = function(){
 
@@ -55,25 +71,31 @@ var AppController = ( function (budgetCtrl , UICtrl) {
         
         // Clear Fields
 
-        // Update Income/Expenses
+        // Add item to Data
 
-        // Show Income / Expenses
+        // Show item in container
 
-        // Update Budget
+        // Calculate Budget
+
+        // Display Budget
+
     }
     
 
-    // FOR EVENT LISTENERS
-    document.querySelector(DOM.inputBtn).addEventListener("click" , ctrlAddItem)
 
-    document.addEventListener("keypress", function (event) {
-
-        if (event.keyCode === 13 || event.which === 13) {            
-            ctrlAddItem();
-        }
-        
-    })
      
-    // PUBLIC METHODS    
+    // PUBLIC METHODS - from Global   
+
+    return {
+
+        // Sets up everything needed to start the application
+        init: function () {
+            setUpEventListeners();
+            console.log("App has started");
+            
+        }
+    }
         
 })(budgetController, UIController)
+
+AppController.init();
