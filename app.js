@@ -1,6 +1,30 @@
 // BUDGET CONTROLLER
 var budgetController = ( function () {
 
+    var Expense = function (id , type, description) {
+        this.id = id,
+        this.type = type,
+        this.description = description
+    }
+
+    var Income = function (id , type, description) {
+        this.id = id,
+        this.type = type,
+        this.description = description
+    }
+
+    // Object to serve as a database for all items and total
+    var Data = {
+        allItems: {
+            exp : [],
+            inc : []
+        },
+        totals: {
+            exp : 0,
+            inc : 0
+        }
+    }
+
     // PUBLIC METHODS    
         
 })()
