@@ -1,20 +1,20 @@
 // BUDGET CONTROLLER
 var budgetController = ( function () {
 
-    var Expense = function (id , type, description) {
+    var Expense = function (id , description, value) {
         this.id = id,
-        this.type = type,
-        this.description = description
+        this.description = description,
+        this.value = value
     }
 
-    var Income = function (id , type, description) {
+    var Income = function (id , description, value) {
         this.id = id,
-        this.type = type,
-        this.description = description
+        this.description = description,
+        this.value = value
     }
 
     // Object to serve as a database for all items and total
-    var Data = {
+    var data = {
         allItems: {
             exp : [],
             inc : []
@@ -22,6 +22,33 @@ var budgetController = ( function () {
         totals: {
             exp : 0,
             inc : 0
+        }
+    }
+
+    return {
+        addItem : function (type, des, val) {
+            var newItem, ID;
+
+            // Create ID - review the syntax, using the brackets instead of dot to pass in a variable or data (string or number) ---- We could not use [length - 1] instead, bcz "length" isn't a variable & itself doesn't contain any value. 
+            if ( data.allItems[type].length > 0 ) {
+                ID = data.allItems[type][data.allItems[type].length - 1 ].id + 1;
+            } else {
+                ID =0;
+            }
+
+            // Create new item based on "inc" or "exp"
+            if ( type === "exp" ) {
+                newItem : new Expense(ID , des, val);
+            } else if ( type === "inc" ){
+                newItem : new Income(ID , des, val);
+            }
+
+            // Automatically pushed into the appropiate data set  // for different names, we would have to use if else conditional
+            data.allItems[type].push(newItem);
+            
+            // Return new item
+            return newItem;
+            
         }
     }
 
@@ -87,15 +114,14 @@ var AppController = ( function (budgetCtrl , UICtrl) {
     
     
     var ctrlAddItem = function(){
+        var input, newItem;
 
         // Get Input
-        var input = UICtrl.getInput();
+        input = UICtrl.getInput();
         console.log(input);
 
-        
-        // Clear Fields
-
-        // Add item to Data
+        // Add item to Budget Controller
+        newItem = budgetCtrl.addItem(input.type, input.description, input.value)
 
         // Show item in container
 
