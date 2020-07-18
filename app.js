@@ -49,10 +49,14 @@ var budgetController = ( function () {
             // console.log(totalItems.length);
 
             for (let i = 0; i < totalItems.length ; i++) {
-                if (totalItems.id === ID) {
-                    var curIndex = totalItems.id; // actual ID
-                    console.log("the Selected element had the id: " + curIndex);
-                    totalItems.splice(curIndex , 1)
+                
+                if ( totalItems[i].id == ID ) {
+                    console.log(totalItems[i].id);
+                    console.log(ID);  // This is a string not a number
+                    // var curIndex = totalItems.id; // actual ID
+                    // console.log("the Selected element had the id: " + curIndex);
+                    // totalItems.splice(curIndex , 1)
+                    console.log(totalItems[i].id + " matched " + ID);
                 }
 
             }
