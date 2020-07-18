@@ -44,9 +44,21 @@ var budgetController = ( function () {
     return {
 
         deleteItem : function (type,ID) {
-            var itemData;
-            itemData = data.allItems[type][ID];
-            console.log(itemData);
+            var totalItems;
+            totalItems = data.allItems[type];
+            // console.log(totalItems.length);
+
+            for (let i = 0; i < totalItems.length ; i++) {
+                if (totalItems.id === ID) {
+                    var curIndex = totalItems.id; // actual ID
+                    console.log("the Selected element had the id: " + curIndex);
+                    totalItems.splice(curIndex , 1)
+                }
+
+            }
+            
+            // itemData = data.allItems[type][id];
+            // console.log(itemData);
             // item.style.color= "red";
         },
         
