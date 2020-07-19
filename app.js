@@ -44,20 +44,28 @@ var budgetController = ( function () {
     return {
 
         deleteItem : function (type,ID) {
-            var totalItems;
+            var totalItems,ids,curIndex;
+            
             totalItems = data.allItems[type];
-            // console.log(totalItems.length);
+            ids = totalItems.map(function (cur, index, array) {
+                return cur.id;
+            })
+            curIndex = ids.indexOf(ID); // returns -1  if not element found
 
+            if (index !== -1) {                
+                totalItems.splice(curIndex , 1);
+            }
+
+            /* // Alternatively 
             for (let i = 0; i < totalItems.length ; i++) {
                 
                 if ( totalItems[i].id === ID ) {
                     var curIndex = i; // index of element having the required ID
                     console.log("Selected element's index: " + curIndex +" and Id:"+ ID);
-                    totalItems.splice(curIndex , 1)
+                    totalItems.splice(curIndex , 1);
                 }
-
             }
-            
+             */
         },
         
         addItem : function (type, des, val) {
