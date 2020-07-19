@@ -50,20 +50,14 @@ var budgetController = ( function () {
 
             for (let i = 0; i < totalItems.length ; i++) {
                 
-                if ( totalItems[i].id == ID ) {
-                    console.log(totalItems[i].id);
-                    console.log(ID);  // This is a string not a number
-                    // var curIndex = totalItems.id; // actual ID
-                    // console.log("the Selected element had the id: " + curIndex);
-                    // totalItems.splice(curIndex , 1)
-                    console.log(totalItems[i].id + " matched " + ID);
+                if ( totalItems[i].id === ID ) {
+                    var curIndex = i; // index of element having the required ID
+                    console.log("Selected element's index: " + curIndex +" and Id:"+ ID);
+                    totalItems.splice(curIndex , 1)
                 }
 
             }
             
-            // itemData = data.allItems[type][id];
-            // console.log(itemData);
-            // item.style.color= "red";
         },
         
         addItem : function (type, des, val) {
@@ -277,7 +271,7 @@ var AppController = ( function (budgetCtrl , UICtrl) {
 
             splitID = itemID.split("-");
             type = splitID[0];
-            ID = splitID[1];
+            ID = parseInt(splitID[1]);
 
             // Delete item from Data
             budgetCtrl.deleteItem(type, ID);
@@ -317,7 +311,6 @@ var AppController = ( function (budgetCtrl , UICtrl) {
 
             // Add item to Budget Controller
             newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-            console.log(newItem);
     
             // Clear fields
             UICtrl.clearFields();
