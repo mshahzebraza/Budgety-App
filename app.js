@@ -52,6 +52,7 @@ var budgetController = ( function () {
 
     return {
 
+        
         calculatePercentages : function () {
             data.allItems.exp.forEach(function (cur) {
                 cur.calcPercentage(data.totals.inc)
@@ -184,6 +185,38 @@ var UIController = ( function () {
         }
     }
 
+    
+    var formatNumber = function (num, type) {
+        var numSplit,int,dec ;
+
+        num = Math.abs(num);
+        num = num.toFixed(2);
+        
+        numSplit = num.split("."); // returns an array of 2 strings
+        int = numSplit[0];
+        dec = numSplit[1];
+
+        if ( int.length > 3){
+            var newInt, rem, mul;
+            rem = int.length%3;
+            mul = (int.length-rem)/3;
+            
+            // reads the remainder
+            newInt = int.substr(0, rem);
+            // reads 3 values for unless multiples of three vanish
+            for (let i = 0; i < mul; i++) {
+                newInt += "," + int.substr(3*i + rem, 3);
+            }
+
+            int = newInt;
+        }
+
+        
+
+        return (type === "exp" ?  "-" : "+") + " " + int + "." + dec;
+        
+    };
+
 
     // PUBLIC METHODS - from Global
      
@@ -235,7 +268,7 @@ var UIController = ( function () {
             // Manipulatiing the HTML
             newHtml = html.replace('%id%', obj.id);
             newHtml = newHtml.replace('%description%', obj.description);
-            newHtml = newHtml.replace('%value%', obj.value);
+            newHtml = newHtml.replace('%value%', formatNumber(obj.value , type) );
 
             // Adding HTML in the document by selecting an html element
             // var x= document.querySelector(element)
@@ -276,13 +309,13 @@ var UIController = ( function () {
         ,
         displayBudget : function (obj) {
 
-            // get the required data from budget controller
-        
+            var type;
+            obj.budget >= 0 ? type = "inc" : type = "exp";
 
             // select the tag using query selector and replace the inner text
-            document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
-            document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
-            document.querySelector(DOMstrings.expensesLabel).textContent = obj.totalExp;
+            document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget, type);
+            document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(obj.totalInc, "inc");
+            document.querySelector(DOMstrings.expensesLabel).textContent = formatNumber(obj.totalExp, "exp");
 
             if (obj.percentage > 0) {
                 document.querySelector(DOMstrings.percentageLabel).textContent = Math.round(obj.percentage) + " %";
