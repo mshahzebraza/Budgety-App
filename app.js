@@ -203,9 +203,14 @@ var UIController = ( function () {
             
             // reads the remainder
             newInt = int.substr(0, rem);
+            
             // reads 3 values for unless multiples of three vanish
             for (let i = 0; i < mul; i++) {
-                newInt += "," + int.substr(3*i + rem, 3);
+                if (newInt === ""){
+                    newInt = int.substr(3*i + rem, 3);
+                } else {
+                    newInt = newInt + "," + int.substr(3*i + rem, 3);
+                }
             }
 
             int = newInt;
