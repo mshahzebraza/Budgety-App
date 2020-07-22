@@ -42,9 +42,6 @@ var budgetController = ( function () {
         data.allItems[type].forEach( function(currentElement) {
             sum += currentElement.value;
         });
-        // data.allItems[type].forEach(element => {
-        //     sum += element.value;
-        // });
         data.totals[type] = sum;
         return sum;
     }
@@ -217,8 +214,6 @@ var UIController = ( function () {
             int = newInt;
         }
 
-        
-
         return (type === "exp" ?  "-" : "+") + " " + int + "." + dec;
         
     };
@@ -379,7 +374,7 @@ var AppController = ( function (budgetCtrl , UICtrl) {
 
         var DOM = UICtrl.getDOMstrings(); // recieves DOM strings from UICtrl
 
-        document.addEventListener("change", UICtrl.changeType);
+        document.querySelector(DOM.inputType).addEventListener("change", UICtrl.changeType);
         
         document.querySelector(DOM.inputBtn).addEventListener("click" , ctrlAddItem)
 
