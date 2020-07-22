@@ -317,12 +317,8 @@ var UIController = ( function () {
 
             fields = document.querySelectorAll( DOMstrings.inputDescription + ", " + DOMstrings.inputValue);
             fieldsArray = Array.prototype.slice.call(fields);
-            
-            // fieldsArray.forEach( function (current, index, array) {
-            //     current.value ="";
-            // } );
+            // slice method makes a copy of and array, and in this case, makes a copy of a nodeList into an array
 
-            // Alternative to course syntax ^ which is a little bit confusing
             fieldsArray.forEach(element => {
                 element.value = "";
             });
@@ -349,8 +345,8 @@ var UIController = ( function () {
             if (obj.percentage > 0) {
                 document.querySelector(DOMstrings.percentageLabel).textContent = Math.round(obj.percentage) + " %";
             } else {
-                document.querySelector(DOMstrings.percentageLabel).textContent = "---";
-                
+                // This is the case when income is not set, and the ratio gives infinity
+                document.querySelector(DOMstrings.percentageLabel).textContent = "---";   
             }
 
 
