@@ -228,6 +228,22 @@ var UIController = ( function () {
      
     return { 
 
+        changeType : function () {
+
+            var fields = document.querySelectorAll(
+                DOMstrings.inputType + "," +
+                DOMstrings.inputDescription + "," +
+                DOMstrings.inputValue
+            );
+
+            nodeListForEach(fields, function (cur) {
+                cur.classList.toggle("red-focus");
+            });
+
+            document.querySelector(DOMstrings.inputBtn).classList.toggle("red");
+            
+        },
+        
         displayMonth: function () {
             var now, year, monthIndex, month;
 
@@ -362,6 +378,8 @@ var AppController = ( function (budgetCtrl , UICtrl) {
     var setUpEventListeners = function () {
 
         var DOM = UICtrl.getDOMstrings(); // recieves DOM strings from UICtrl
+
+        document.addEventListener("change", UICtrl.changeType);
         
         document.querySelector(DOM.inputBtn).addEventListener("click" , ctrlAddItem)
 
