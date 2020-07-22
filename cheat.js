@@ -187,7 +187,7 @@ var UIController = (function() {
         dateLabel: '.budget__title--month'
     };
     
-/*     
+    
     var formatNumber = function(num, type) {
         var numSplit, int, dec, type;
         
@@ -214,14 +214,14 @@ var UIController = (function() {
         return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
 
     };
- */    
-/*     
+    
+    
     var nodeListForEach = function(list, callback) {
         for (var i = 0; i < list.length; i++) {
             callback(list[i], i);
         }
     };
- */    
+    
     
     return {
         getInput: function() {
@@ -233,7 +233,7 @@ var UIController = (function() {
         },
         
         
-        addListItem: function(obj, type) {
+        addListItem: function(obj, type) { 
             var html, newHtml, element;
             // Create HTML string with placeholder text
             

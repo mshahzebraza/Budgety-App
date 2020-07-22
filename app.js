@@ -176,6 +176,7 @@ var UIController = ( function () {
         percentageLabel: '.budget__expenses--percentage',
         container: ".container",
         expensesPercLabel: ".item__percentage",
+        dateLabel: ".budget__title--month",
     }
 
     var nodeListForEach = function (list, callback) {
@@ -227,6 +228,18 @@ var UIController = ( function () {
      
     return { 
 
+        displayMonth: function () {
+            var now, year, monthIndex, month;
+
+            now = new Date();
+            months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            monthIndex = now.getMonth();
+            month = months[monthIndex];
+            year = now.getFullYear();
+            document.querySelector(DOMstrings.dateLabel).textContent = month + " of " +year;
+            
+        },
+        
         displayPercentages : function (allPerc) {
             for (let i = 0; i < allPerc.length; i++) {
 
@@ -454,6 +467,7 @@ var AppController = ( function (budgetCtrl , UICtrl) {
 
         // Sets up everything needed to start the application
         init: function () {
+            UICtrl.displayMonth();
             setUpEventListeners();
             UICtrl.displayBudget({
                 budget : 0,
@@ -462,7 +476,7 @@ var AppController = ( function (budgetCtrl , UICtrl) {
                 percentage : -1
                 
             });
-            console.log("App has started");
+            // console.log("App has started");
             
         }
     }
