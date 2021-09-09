@@ -1,3 +1,3 @@
 > # Budgety App
 > *A Person **Web App** project based on **Vanilla JS***
-> (*[Live URL](budgety-app-eawpqi06y-mshahzebraza97.vercel.app)*)  
+> (*[Live URL](https://budgety-app-2wrh6viym-mshahzebraza97.vercel.app/)*)  
